@@ -1,0 +1,93 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    harvesterhci.io/vmRunStrategy: RerunOnFailure
+    harvesterhci.io/volumeClaimTemplates: '[{"metadata":{"name":"vm-vgpu-disk-0-l2kds","annotations":{"harvesterhci.io/imageId":"default/image-qptkx"}},"spec":{"accessModes":["ReadWriteMany"],"resources":{"requests":{"storage":"10Gi"}},"volumeMode":"Block","storageClassName":"longhorn-image-qptkx"}}]'
+    kubevirt.io/latest-observed-api-version: v1
+    kubevirt.io/storage-observed-api-version: v1
+    network.harvesterhci.io/ips: '[]'
+  finalizers:
+  - harvesterhci.io/VMController.UnsetOwnerOfPVCs
+  - kubevirt.io/virtualMachineControllerFinalize
+  labels:
+    harvesterhci.io/creator: harvester
+    harvesterhci.io/os: ubuntu
+  name: vm-vgpu
+  namespace: default
+spec:
+  runStrategy: RerunOnFailure
+  template:
+    metadata:
+      annotations:
+        harvesterhci.io/sshNames: '[]'
+      creationTimestamp: null
+      labels:
+        harvesterhci.io/vmName: vm-vgpu
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: network.harvesterhci.io/cluster-net
+                operator: In
+                values:
+                - "true"
+      architecture: amd64
+      domain:
+        cpu:
+          cores: 2
+          sockets: 1
+          threads: 1
+        devices:
+          disks:
+          - bootOrder: 1
+            disk:
+              bus: virtio
+            name: disk-0
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+          gpus:
+          - deviceName: nvidia.com/NVIDIA_A2-1A
+            name: harvester-62vld-000008004
+          inputs:
+          - bus: usb
+            name: tablet
+            type: tablet
+          interfaces:
+          - bridge: {}
+            macAddress: 46:68:4e:3f:6f:f4
+            model: virtio
+            name: default
+        features:
+          acpi:
+            enabled: true
+        machine:
+          type: q35
+        memory:
+          guest: 1948Mi
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: 125m
+            memory: 1948Mi
+      evictionStrategy: LiveMigrate
+      networks:
+      - multus:
+          networkName: default/vm-net
+        name: default
+      terminationGracePeriodSeconds: 20
+      volumes:
+      - name: disk-0
+        persistentVolumeClaim:
+          claimName: vm-vgpu-disk-0-l2kds
+      - cloudInitNoCloud:
+          networkDataSecretRef:
+            name: vm-vgpu-z6y1e
+          secretRef:
+            name: vm-vgpu-z6y1e
+        name: cloudinitdisk

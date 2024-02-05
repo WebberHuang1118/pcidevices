@@ -1,0 +1,13 @@
+<Manually Run Testing Cases>
+./.dapper -s
+$ export GHW_DISABLE_WARNINGS=true
+$ umockdev-run -d ./tests/snapshots/all.umockdev -- go test -v ./pkg/... -cover -tags=test -count=1
+$ umockdev-run -d ./tests/snapshots/all.umockdev -- go test -v ./pkg/controller/gpudevice/... -cover -tags=test -count=1
+$ umockdev-run -d ./tests/snapshots/vgpu-node.umockdev -- go test -v ./pkg/util/gpuhelper/... -cover -tags=test
+$ go test -v ./tests/integration -count=1
+
+find eth interface pci address
+    $ "grep PCI_SLOT_NAME /sys/class/net/*/device/uevent"
+
+Cat all file with path
+    $find . -name '*'   -print   -exec cat {} \;   -printf "\n"    

@@ -1,0 +1,91 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  annotations:
+    harvesterhci.io/vmRunStrategy: RerunOnFailure
+    harvesterhci.io/volumeClaimTemplates: '[{"metadata":{"name":"vm-disk-0-gwcpo","annotations":{"harvesterhci.io/imageId":"default/image-qptkx"}},"spec":{"accessModes":["ReadWriteMany"],"resources":{"requests":{"storage":"10Gi"}},"volumeMode":"Block","storageClassName":"longhorn-image-qptkx"}}]'
+  finalizers:
+  - kubevirt.io/virtualMachineControllerFinalize
+  - harvesterhci.io/VMController.UnsetOwnerOfPVCs
+  labels:
+    harvesterhci.io/creator: harvester
+    harvesterhci.io/os: ubuntu
+  name: vm
+  namespace: default
+spec:
+  runStrategy: RerunOnFailure
+  template:
+    metadata:
+      annotations:
+        harvesterhci.io/sshNames: '[]'
+      creationTimestamp: null
+      labels:
+        harvesterhci.io/vmName: vm
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: network.harvesterhci.io/cluster-net
+                operator: In
+                values:
+                - "true"
+      architecture: amd64
+      domain:
+        cpu:
+          cores: 2
+          sockets: 1
+          threads: 1
+        devices:
+          disks:
+          - bootOrder: 1
+            disk:
+              bus: virtio
+            name: disk-0
+          - disk:
+              bus: virtio
+            name: cloudinitdisk
+          hostDevices:
+          - deviceName: nvidia.com/GA107GL_A2___A16
+            name: harvester-62vld-000008000
+          inputs:
+          - bus: usb
+            name: tablet
+            type: tablet
+          interfaces:
+          - bridge: {}
+            macAddress: 16:85:9d:e8:1b:ad
+            model: virtio
+            name: default
+        features:
+          acpi:
+            enabled: true
+        machine:
+          type: q35
+        memory:
+          guest: 1948Mi
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2Gi
+          requests:
+            cpu: 125m
+            memory: 1948Mi
+      evictionStrategy: LiveMigrate
+      hostname: vm
+      networks:
+      - multus:
+          networkName: default/vm-net
+        name: default
+      terminationGracePeriodSeconds: 20
+      volumes:
+      - name: disk-0
+        persistentVolumeClaim:
+          claimName: vm-disk-0-gwcpo
+      - cloudInitNoCloud:
+          networkDataSecretRef:
+            name: vm-kn9yc
+          secretRef:
+            name: vm-kn9yc
+        name: cloudinitdisk

@@ -1,0 +1,1057 @@
+=== RUN   TestNewPCIDeviceForName
+2023/11/24 09:59:56 start new pci device from name
+=== RUN   TestNewPCIDeviceForName/Metadata_is_present
+    pcidevice_test.go:73: {{ } {deepgreen-001f6      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[harvesterhci.io/pcideviceDriver:fake] [] []  []} {} {00:1f.6 8086 1521 0200  deepgreen intel.com/I350_GIGABIT_NETWORK_CONNECTION Ethernet controller: Intel Corporation I350 Gigabit Network Connection fake}}
+--- PASS: TestNewPCIDeviceForName (0.00s)
+    --- PASS: TestNewPCIDeviceForName/Metadata_is_present (0.00s)
+=== RUN   TestDescriptionForVendorDevice
+=== RUN   TestDescriptionForVendorDevice/NVIDIA_A100
+=== RUN   TestDescriptionForVendorDevice/NVIDIA_GeForce_GTX_1060
+=== RUN   TestDescriptionForVendorDevice/AMD_Radeon_X850
+=== RUN   TestDescriptionForVendorDevice/Intel_I350_Gigabit_Network_Connection
+=== RUN   TestDescriptionForVendorDevice/Mellanox_MT2892
+--- PASS: TestDescriptionForVendorDevice (0.00s)
+    --- PASS: TestDescriptionForVendorDevice/NVIDIA_A100 (0.00s)
+    --- PASS: TestDescriptionForVendorDevice/NVIDIA_GeForce_GTX_1060 (0.00s)
+    --- PASS: TestDescriptionForVendorDevice/AMD_Radeon_X850 (0.00s)
+    --- PASS: TestDescriptionForVendorDevice/Intel_I350_Gigabit_Network_Connection (0.00s)
+    --- PASS: TestDescriptionForVendorDevice/Mellanox_MT2892 (0.00s)
+PASS
+coverage: 15.0% of statements
+ok  	github.com/harvester/pcidevices/pkg/apis/devices.harvesterhci.io/v1beta1	0.119s	coverage: 15.0% of statements
+?   	github.com/harvester/pcidevices/pkg/codegen	[no test files]
+?   	github.com/harvester/pcidevices/pkg/codegen/cleanup	[no test files]
+?   	github.com/harvester/pcidevices/pkg/controller	[no test files]
+?   	github.com/harvester/pcidevices/pkg/controller/nodecleanup	[no test files]
+?   	github.com/harvester/pcidevices/pkg/controller/nodes	[no test files]
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+=== RUN   Test_reconcilePCIDevices
+**** GroupPaths ****
+add path /sys/kernel/iommu_groups/0/devices/0000:00:00.0
+add path /sys/kernel/iommu_groups/1/devices/0000:00:01.0
+add path /sys/kernel/iommu_groups/10/devices/0000:00:14.0
+add path /sys/kernel/iommu_groups/10/devices/0000:00:14.2
+add path /sys/kernel/iommu_groups/11/devices/0000:00:14.3
+add path /sys/kernel/iommu_groups/12/devices/0000:00:15.0
+add path /sys/kernel/iommu_groups/12/devices/0000:00:15.1
+add path /sys/kernel/iommu_groups/13/devices/0000:00:16.0
+add path /sys/kernel/iommu_groups/13/devices/0000:00:16.3
+add path /sys/kernel/iommu_groups/14/devices/0000:00:1c.0
+add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.0
+add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.3
+add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.4
+add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.5
+add path /sys/kernel/iommu_groups/16/devices/0000:01:00.0
+add path /sys/kernel/iommu_groups/17/devices/0000:74:00.0
+add path /sys/kernel/iommu_groups/18/devices/0000:02:00.0
+add path /sys/kernel/iommu_groups/19/devices/0000:03:02.0
+add path /sys/kernel/iommu_groups/2/devices/0000:00:02.0
+add path /sys/kernel/iommu_groups/20/devices/0000:03:04.0
+add path /sys/kernel/iommu_groups/21/devices/0000:04:00.0
+add path /sys/kernel/iommu_groups/3/devices/0000:00:04.0
+add path /sys/kernel/iommu_groups/4/devices/0000:00:07.0
+add path /sys/kernel/iommu_groups/5/devices/0000:00:07.3
+add path /sys/kernel/iommu_groups/6/devices/0000:00:0a.0
+add path /sys/kernel/iommu_groups/7/devices/0000:00:0d.0
+add path /sys/kernel/iommu_groups/7/devices/0000:00:0d.3
+add path /sys/kernel/iommu_groups/8/devices/0000:00:0e.0
+add path /sys/kernel/iommu_groups/8/devices/10000:e0:01.0
+add path /sys/kernel/iommu_groups/8/devices/10000:e0:01.2
+add path /sys/kernel/iommu_groups/8/devices/10000:e1:00.0
+add path /sys/kernel/iommu_groups/9/devices/0000:00:12.0
+
+
+*** groupMap ****
+add map 0000:00:00.0 -> 0
+add map 0000:00:01.0 -> 1
+add map 0000:00:14.0 -> 10
+add map 0000:00:14.2 -> 10
+add map 0000:00:14.3 -> 11
+add map 0000:00:15.0 -> 12
+add map 0000:00:15.1 -> 12
+add map 0000:00:16.0 -> 13
+add map 0000:00:16.3 -> 13
+add map 0000:00:1c.0 -> 14
+add map 0000:00:1f.0 -> 15
+add map 0000:00:1f.3 -> 15
+add map 0000:00:1f.4 -> 15
+add map 0000:00:1f.5 -> 15
+add map 0000:01:00.0 -> 16
+add map 0000:74:00.0 -> 17
+add map 0000:02:00.0 -> 18
+add map 0000:03:02.0 -> 19
+add map 0000:00:02.0 -> 2
+add map 0000:03:04.0 -> 20
+add map 0000:04:00.0 -> 21
+add map 0000:00:04.0 -> 3
+add map 0000:00:07.0 -> 4
+add map 0000:00:07.3 -> 5
+add map 0000:00:0a.0 -> 6
+add map 0000:00:0d.0 -> 7
+add map 0000:00:0d.3 -> 7
+add map 0000:00:0e.0 -> 8
+add map 10000:e0:01.0 -> 8
+add map 10000:e0:01.2 -> 8
+add map 10000:e1:00.0 -> 8
+add map 0000:00:12.0 -> 9
+
+
+Creating PCI Device: TEST_NODE-000000000 {Address:0000:00:00.0 VendorID:8086 DeviceID:2f00 ClassID:0600 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMI2 Description:Host bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMI2 KernelDriverInUse:}
+pci TEST_NODE-000000000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000010 {Address:0000:00:01.0 VendorID:8086 DeviceID:2f02 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_1 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 1 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000010 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000011 {Address:0000:00:01.1 VendorID:8086 DeviceID:2f03 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_1 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 1 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000011 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000020 {Address:0000:00:02.0 VendorID:8086 DeviceID:2f04 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000020 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000021 {Address:0000:00:02.1 VendorID:8086 DeviceID:2f05 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000021 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000022 {Address:0000:00:02.2 VendorID:8086 DeviceID:2f06 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000022 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000023 {Address:0000:00:02.3 VendorID:8086 DeviceID:2f07 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000023 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000030 {Address:0000:00:03.0 VendorID:8086 DeviceID:2f08 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000030 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000031 {Address:0000:00:03.1 VendorID:8086 DeviceID:2f09 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000031 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000032 {Address:0000:00:03.2 VendorID:8086 DeviceID:2f0a ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000032 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000033 {Address:0000:00:03.3 VendorID:8086 DeviceID:2f0b ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000000033 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000040 {Address:0000:00:04.0 VendorID:8086 DeviceID:2f20 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 0 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000040 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000041 {Address:0000:00:04.1 VendorID:8086 DeviceID:2f21 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 1 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000041 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000042 {Address:0000:00:04.2 VendorID:8086 DeviceID:2f22 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_2 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 2 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000042 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000043 {Address:0000:00:04.3 VendorID:8086 DeviceID:2f23 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 3 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000043 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000044 {Address:0000:00:04.4 VendorID:8086 DeviceID:2f24 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_4 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 4 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000044 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000045 {Address:0000:00:04.5 VendorID:8086 DeviceID:2f25 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_5 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 5 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000045 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000046 {Address:0000:00:04.6 VendorID:8086 DeviceID:2f26 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_6 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 6 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000046 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000047 {Address:0000:00:04.7 VendorID:8086 DeviceID:2f27 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_7 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 7 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000000047 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000050 {Address:0000:00:05.0 VendorID:8086 DeviceID:2f28 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_ADDRESS_MAP_VTD_MISC_SYSTEM_MANAGEMENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Address Map, VTd_Misc, System Management KernelDriverInUse:}
+pci TEST_NODE-000000050 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000051 {Address:0000:00:05.1 VendorID:8086 DeviceID:2f29 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOT_PLUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Hot Plug KernelDriverInUse:}
+pci TEST_NODE-000000051 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000052 {Address:0000:00:05.2 VendorID:8086 DeviceID:2f2a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_RAS_CONTROL_STATUS_AND_GLOBAL_ERRORS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 RAS, Control Status and Global Errors KernelDriverInUse:}
+pci TEST_NODE-000000052 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000054 {Address:0000:00:05.4 VendorID:8086 DeviceID:2f2c ClassID:0800 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_I_O_APIC Description:PIC: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 I/O APIC KernelDriverInUse:}
+pci TEST_NODE-000000054 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000056 {Address:0000:00:05.6 VendorID:8086 DeviceID:2f39 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_I_O_PERFORMANCE_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 I/O Performance Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-000000056 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000110 {Address:0000:00:11.0 VendorID:8086 DeviceID:8d7c ClassID:FF00 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_SPSR Description:Class FF00: Intel Corporation C610/X99 series chipset SPSR KernelDriverInUse:}
+pci TEST_NODE-000000110 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000000140 {Address:0000:00:14.0 VendorID:8086 DeviceID:8d31 ClassID:0C03 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_USB_XHCI_HOST_CONTROLLER Description:Class 0C03: Intel Corporation C610/X99 series chipset USB xHCI Host Controller KernelDriverInUse:xhci_hcd}
+pci TEST_NODE-000000140 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001a0 {Address:0000:00:1a.0 VendorID:8086 DeviceID:8d2d ClassID:0C03 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_USB_ENHANCED_HOST_CONTROLLER_2 Description:Class 0C03: Intel Corporation C610/X99 series chipset USB Enhanced Host Controller #2 KernelDriverInUse:ehci-pci}
+pci TEST_NODE-0000001a0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001c0 {Address:0000:00:1c.0 VendorID:8086 DeviceID:8d10 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_PCI_EXPRESS_ROOT_PORT_1 Description:PCI bridge: Intel Corporation C610/X99 series chipset PCI Express Root Port #1 KernelDriverInUse:pcieport}
+pci TEST_NODE-0000001c0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001c2 {Address:0000:00:1c.2 VendorID:8086 DeviceID:8d14 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation C610/X99 series chipset PCI Express Root Port #3 KernelDriverInUse:pcieport}
+pci TEST_NODE-0000001c2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001c4 {Address:0000:00:1c.4 VendorID:8086 DeviceID:8d18 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_PCI_EXPRESS_ROOT_PORT_5 Description:PCI bridge: Intel Corporation C610/X99 series chipset PCI Express Root Port #5 KernelDriverInUse:pcieport}
+pci TEST_NODE-0000001c4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001c6 {Address:0000:00:1c.6 VendorID:8086 DeviceID:8d1c ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_PCI_EXPRESS_ROOT_PORT_7 Description:PCI bridge: Intel Corporation C610/X99 series chipset PCI Express Root Port #7 KernelDriverInUse:pcieport}
+pci TEST_NODE-0000001c6 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001c7 {Address:0000:00:1c.7 VendorID:8086 DeviceID:8d1e ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_PCI_EXPRESS_ROOT_PORT_8 Description:PCI bridge: Intel Corporation C610/X99 series chipset PCI Express Root Port #8 KernelDriverInUse:pcieport}
+pci TEST_NODE-0000001c7 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001d0 {Address:0000:00:1d.0 VendorID:8086 DeviceID:8d26 ClassID:0C03 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_USB_ENHANCED_HOST_CONTROLLER_1 Description:Class 0C03: Intel Corporation C610/X99 series chipset USB Enhanced Host Controller #1 KernelDriverInUse:ehci-pci}
+pci TEST_NODE-0000001d0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001f0 {Address:0000:00:1f.0 VendorID:8086 DeviceID:8d44 ClassID:0601 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_LPC_CONTROLLER Description:ISA bridge: Intel Corporation C610/X99 series chipset LPC Controller KernelDriverInUse:lpc_ich}
+pci TEST_NODE-0000001f0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000001f3 {Address:0000:00:1f.3 VendorID:8086 DeviceID:8d22 ClassID:0C05 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/C610_X99_SERIES_CHIPSET_SMBUS_CONTROLLER Description:Class 0C05: Intel Corporation C610/X99 series chipset SMBus Controller KernelDriverInUse:i801_smbus}
+pci TEST_NODE-0000001f3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000001000 {Address:0000:01:00.0 VendorID:103c DeviceID:3306 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:hewlettpackard.com/INTEGRATED_LIGHTSOUT_STANDARD_SLAVE_INSTRUMENTATION__SYSTEM_SUPPORT Description:System peripheral: Hewlett-Packard Company Integrated Lights-Out Standard Slave Instrumentation & System Support KernelDriverInUse:hpwdt}
+pci TEST_NODE-000001000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000001001 {Address:0000:01:00.1 VendorID:102b DeviceID:0533 ClassID:0300 IOMMUGroup: NodeName:TEST_NODE ResourceName:matrox.com/MGA_G200EH Description:VGA compatible controller: Matrox Electronics Systems Ltd. MGA G200EH KernelDriverInUse:}
+pci TEST_NODE-000001001 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000001002 {Address:0000:01:00.2 VendorID:103c DeviceID:3307 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:hewlettpackard.com/INTEGRATED_LIGHTSOUT_STANDARD_MANAGEMENT_PROCESSOR_SUPPORT_AND_MESSAGING Description:System peripheral: Hewlett-Packard Company Integrated Lights-Out Standard Management Processor Support and Messaging KernelDriverInUse:hpilo}
+pci TEST_NODE-000001002 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000001004 {Address:0000:01:00.4 VendorID:103c DeviceID:3300 ClassID:0C03 IOMMUGroup: NodeName:TEST_NODE ResourceName:hewlettpackard.com/INTEGRATED_LIGHTSOUT_STANDARD_VIRTUAL_USB_CONTROLLER Description:Class 0C03: Hewlett-Packard Company Integrated Lights-Out Standard Virtual USB Controller KernelDriverInUse:uhci_hcd}
+pci TEST_NODE-000001004 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000003000 {Address:0000:03:00.0 VendorID:103c DeviceID:3239 ClassID:0104 IOMMUGroup: NodeName:TEST_NODE ResourceName:hewlettpackard.com/SMART_ARRAY_GEN9_CONTROLLERS Description:RAID bus controller: Hewlett-Packard Company Smart Array Gen9 Controllers KernelDriverInUse:hpsa}
+pci TEST_NODE-000003000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000004000 {Address:0000:04:00.0 VendorID:8086 DeviceID:10fb ClassID:0200 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/82599ES_10GIGABIT_SFI_SFP_NETWORK_CONNECTION Description:Ethernet controller: Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection KernelDriverInUse:ixgbe}
+pci TEST_NODE-000004000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000008000 {Address:0000:08:00.0 VendorID:10de DeviceID:1eb8 ClassID:0302 IOMMUGroup: NodeName:TEST_NODE ResourceName:nvidia.com/TU104GL_TESLA_T4 Description:3D controller: NVIDIA Corporation TU104GL [Tesla T4] KernelDriverInUse:nvidia}
+pci TEST_NODE-000008000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f080 {Address:0000:7f:08.0 VendorID:8086 DeviceID:2f80 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:}
+pci TEST_NODE-00007f080 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f082 {Address:0000:7f:08.2 VendorID:8086 DeviceID:2f32 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f082 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f083 {Address:0000:7f:08.3 VendorID:8086 DeviceID:2f83 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:}
+pci TEST_NODE-00007f083 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f086 {Address:0000:7f:08.6 VendorID:8086 DeviceID:2f86 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 Debug KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f086 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f090 {Address:0000:7f:09.0 VendorID:8086 DeviceID:2f90 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:}
+pci TEST_NODE-00007f090 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f092 {Address:0000:7f:09.2 VendorID:8086 DeviceID:2f33 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f092 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f093 {Address:0000:7f:09.3 VendorID:8086 DeviceID:2f93 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:}
+pci TEST_NODE-00007f093 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f096 {Address:0000:7f:09.6 VendorID:8086 DeviceID:2f96 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 Debug KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f096 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0b0 {Address:0000:7f:0b.0 VendorID:8086 DeviceID:2f81 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:}
+pci TEST_NODE-00007f0b0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0b1 {Address:0000:7f:0b.1 VendorID:8086 DeviceID:2f36 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f0b1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0b2 {Address:0000:7f:0b.2 VendorID:8086 DeviceID:2f37 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f0b2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0b5 {Address:0000:7f:0b.5 VendorID:8086 DeviceID:2f3e ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_2_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 2 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f0b5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c0 {Address:0000:7f:0c.0 VendorID:8086 DeviceID:2fe0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c1 {Address:0000:7f:0c.1 VendorID:8086 DeviceID:2fe1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c2 {Address:0000:7f:0c.2 VendorID:8086 DeviceID:2fe2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c3 {Address:0000:7f:0c.3 VendorID:8086 DeviceID:2fe3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c4 {Address:0000:7f:0c.4 VendorID:8086 DeviceID:2fe4 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c5 {Address:0000:7f:0c.5 VendorID:8086 DeviceID:2fe5 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c6 {Address:0000:7f:0c.6 VendorID:8086 DeviceID:2fe6 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c6 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0c7 {Address:0000:7f:0c.7 VendorID:8086 DeviceID:2fe7 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0c7 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0d0 {Address:0000:7f:0d.0 VendorID:8086 DeviceID:2fe8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0d0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0d1 {Address:0000:7f:0d.1 VendorID:8086 DeviceID:2fe9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0d1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0d2 {Address:0000:7f:0d.2 VendorID:8086 DeviceID:2fea ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0d2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0d3 {Address:0000:7f:0d.3 VendorID:8086 DeviceID:2feb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0d3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f0 {Address:0000:7f:0f.0 VendorID:8086 DeviceID:2ff8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-00007f0f0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f1 {Address:0000:7f:0f.1 VendorID:8086 DeviceID:2ff9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-00007f0f1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f2 {Address:0000:7f:0f.2 VendorID:8086 DeviceID:2ffa ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-00007f0f2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f3 {Address:0000:7f:0f.3 VendorID:8086 DeviceID:2ffb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-00007f0f3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f4 {Address:0000:7f:0f.4 VendorID:8086 DeviceID:2ffc ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0f4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f5 {Address:0000:7f:0f.5 VendorID:8086 DeviceID:2ffd ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0f5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f0f6 {Address:0000:7f:0f.6 VendorID:8086 DeviceID:2ffe ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-00007f0f6 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f100 {Address:0000:7f:10.0 VendorID:8086 DeviceID:2f1d ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCIE_RING_INTERFACE Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCIe Ring Interface KernelDriverInUse:}
+pci TEST_NODE-00007f100 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f101 {Address:0000:7f:10.1 VendorID:8086 DeviceID:2f34 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCIE_RING_INTERFACE Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCIe Ring Interface KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f101 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f105 {Address:0000:7f:10.5 VendorID:8086 DeviceID:2f1e ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-00007f105 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f106 {Address:0000:7f:10.6 VendorID:8086 DeviceID:2f7d ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-00007f106 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f107 {Address:0000:7f:10.7 VendorID:8086 DeviceID:2f1f ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-00007f107 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f120 {Address:0000:7f:12.0 VendorID:8086 DeviceID:2fa0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 KernelDriverInUse:}
+pci TEST_NODE-00007f120 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f121 {Address:0000:7f:12.1 VendorID:8086 DeviceID:2f30 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f121 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f122 {Address:0000:7f:12.2 VendorID:8086 DeviceID:2f70 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 Debug KernelDriverInUse:}
+pci TEST_NODE-00007f122 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f124 {Address:0000:7f:12.4 VendorID:8086 DeviceID:2f60 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 KernelDriverInUse:}
+pci TEST_NODE-00007f124 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f125 {Address:0000:7f:12.5 VendorID:8086 DeviceID:2f38 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f125 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f126 {Address:0000:7f:12.6 VendorID:8086 DeviceID:2f78 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 Debug KernelDriverInUse:}
+pci TEST_NODE-00007f126 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f130 {Address:0000:7f:13.0 VendorID:8086 DeviceID:2fa8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-00007f130 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f131 {Address:0000:7f:13.1 VendorID:8086 DeviceID:2f71 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-00007f131 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f132 {Address:0000:7f:13.2 VendorID:8086 DeviceID:2faa ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-00007f132 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f133 {Address:0000:7f:13.3 VendorID:8086 DeviceID:2fab ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-00007f133 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f136 {Address:0000:7f:13.6 VendorID:8086 DeviceID:2fae ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_CHANNEL_0_1_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Channel 0/1 Broadcast KernelDriverInUse:}
+pci TEST_NODE-00007f136 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f137 {Address:0000:7f:13.7 VendorID:8086 DeviceID:2faf ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_GLOBAL_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Global Broadcast KernelDriverInUse:}
+pci TEST_NODE-00007f137 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f140 {Address:0000:7f:14.0 VendorID:8086 DeviceID:2fb0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_0_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 0 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f140 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f141 {Address:0000:7f:14.1 VendorID:8086 DeviceID:2fb1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_1_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 1 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f141 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f142 {Address:0000:7f:14.2 VendorID:8086 DeviceID:2fb2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_0_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 0 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-00007f142 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f143 {Address:0000:7f:14.3 VendorID:8086 DeviceID:2fb3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_1_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 1 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-00007f143 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f144 {Address:0000:7f:14.4 VendorID:8086 DeviceID:2fbc ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-00007f144 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f145 {Address:0000:7f:14.5 VendorID:8086 DeviceID:2fbd ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-00007f145 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f146 {Address:0000:7f:14.6 VendorID:8086 DeviceID:2fbe ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-00007f146 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f147 {Address:0000:7f:14.7 VendorID:8086 DeviceID:2fbf ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-00007f147 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f150 {Address:0000:7f:15.0 VendorID:8086 DeviceID:2fb4 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_2_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 2 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f150 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f151 {Address:0000:7f:15.1 VendorID:8086 DeviceID:2fb5 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_3_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 3 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f151 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f160 {Address:0000:7f:16.0 VendorID:8086 DeviceID:2f68 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-00007f160 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f161 {Address:0000:7f:16.1 VendorID:8086 DeviceID:2f79 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-00007f161 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f162 {Address:0000:7f:16.2 VendorID:8086 DeviceID:2f6a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-00007f162 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f163 {Address:0000:7f:16.3 VendorID:8086 DeviceID:2f6b ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-00007f163 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f166 {Address:0000:7f:16.6 VendorID:8086 DeviceID:2f6e ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_CHANNEL_2_3_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Channel 2/3 Broadcast KernelDriverInUse:}
+pci TEST_NODE-00007f166 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f167 {Address:0000:7f:16.7 VendorID:8086 DeviceID:2f6f ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_GLOBAL_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Global Broadcast KernelDriverInUse:}
+pci TEST_NODE-00007f167 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f170 {Address:0000:7f:17.0 VendorID:8086 DeviceID:2fd0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_0_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 0 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f170 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f171 {Address:0000:7f:17.1 VendorID:8086 DeviceID:2fd1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_1_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 1 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-00007f171 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f172 {Address:0000:7f:17.2 VendorID:8086 DeviceID:2fd2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_0_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 0 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-00007f172 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f173 {Address:0000:7f:17.3 VendorID:8086 DeviceID:2fd3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_1_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 1 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-00007f173 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f174 {Address:0000:7f:17.4 VendorID:8086 DeviceID:2fb8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-00007f174 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f175 {Address:0000:7f:17.5 VendorID:8086 DeviceID:2fb9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-00007f175 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f176 {Address:0000:7f:17.6 VendorID:8086 DeviceID:2fba ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-00007f176 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f177 {Address:0000:7f:17.7 VendorID:8086 DeviceID:2fbb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-00007f177 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1e0 {Address:0000:7f:1e.0 VendorID:8086 DeviceID:2f98 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-00007f1e0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1e1 {Address:0000:7f:1e.1 VendorID:8086 DeviceID:2f99 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-00007f1e1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1e2 {Address:0000:7f:1e.2 VendorID:8086 DeviceID:2f9a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-00007f1e2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1e3 {Address:0000:7f:1e.3 VendorID:8086 DeviceID:2fc0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-00007f1e3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1e4 {Address:0000:7f:1e.4 VendorID:8086 DeviceID:2f9c ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-00007f1e4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1f0 {Address:0000:7f:1f.0 VendorID:8086 DeviceID:2f88 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_VCU Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 VCU KernelDriverInUse:}
+pci TEST_NODE-00007f1f0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-00007f1f2 {Address:0000:7f:1f.2 VendorID:8086 DeviceID:2f8a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_VCU Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 VCU KernelDriverInUse:}
+pci TEST_NODE-00007f1f2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080000 {Address:0000:80:00.0 VendorID:8086 DeviceID:2f01 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_0 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 0 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080000 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080010 {Address:0000:80:01.0 VendorID:8086 DeviceID:2f02 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_1 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 1 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080010 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080011 {Address:0000:80:01.1 VendorID:8086 DeviceID:2f03 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_1 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 1 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080011 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080020 {Address:0000:80:02.0 VendorID:8086 DeviceID:2f04 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080020 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080021 {Address:0000:80:02.1 VendorID:8086 DeviceID:2f05 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080021 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080022 {Address:0000:80:02.2 VendorID:8086 DeviceID:2f06 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080022 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080023 {Address:0000:80:02.3 VendorID:8086 DeviceID:2f07 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_2 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 2 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080023 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080030 {Address:0000:80:03.0 VendorID:8086 DeviceID:2f08 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080030 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080031 {Address:0000:80:03.1 VendorID:8086 DeviceID:2f09 ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080031 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080032 {Address:0000:80:03.2 VendorID:8086 DeviceID:2f0a ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080032 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080033 {Address:0000:80:03.3 VendorID:8086 DeviceID:2f0b ClassID:0604 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCI_EXPRESS_ROOT_PORT_3 Description:PCI bridge: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCI Express Root Port 3 KernelDriverInUse:pcieport}
+pci TEST_NODE-000080033 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080040 {Address:0000:80:04.0 VendorID:8086 DeviceID:2f20 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 0 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080040 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080041 {Address:0000:80:04.1 VendorID:8086 DeviceID:2f21 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 1 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080041 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080042 {Address:0000:80:04.2 VendorID:8086 DeviceID:2f22 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_2 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 2 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080042 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080043 {Address:0000:80:04.3 VendorID:8086 DeviceID:2f23 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 3 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080043 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080044 {Address:0000:80:04.4 VendorID:8086 DeviceID:2f24 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_4 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 4 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080044 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080045 {Address:0000:80:04.5 VendorID:8086 DeviceID:2f25 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_5 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 5 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080045 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080046 {Address:0000:80:04.6 VendorID:8086 DeviceID:2f26 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_6 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 6 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080046 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080047 {Address:0000:80:04.7 VendorID:8086 DeviceID:2f27 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DMA_CHANNEL_7 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DMA Channel 7 KernelDriverInUse:ioatdma}
+pci TEST_NODE-000080047 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080050 {Address:0000:80:05.0 VendorID:8086 DeviceID:2f28 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_ADDRESS_MAP_VTD_MISC_SYSTEM_MANAGEMENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Address Map, VTd_Misc, System Management KernelDriverInUse:}
+pci TEST_NODE-000080050 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080051 {Address:0000:80:05.1 VendorID:8086 DeviceID:2f29 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOT_PLUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Hot Plug KernelDriverInUse:}
+pci TEST_NODE-000080051 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080052 {Address:0000:80:05.2 VendorID:8086 DeviceID:2f2a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_RAS_CONTROL_STATUS_AND_GLOBAL_ERRORS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 RAS, Control Status and Global Errors KernelDriverInUse:}
+pci TEST_NODE-000080052 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080054 {Address:0000:80:05.4 VendorID:8086 DeviceID:2f2c ClassID:0800 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_I_O_APIC Description:PIC: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 I/O APIC KernelDriverInUse:}
+pci TEST_NODE-000080054 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-000080056 {Address:0000:80:05.6 VendorID:8086 DeviceID:2f39 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_I_O_PERFORMANCE_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 I/O Performance Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-000080056 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff080 {Address:0000:ff:08.0 VendorID:8086 DeviceID:2f80 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:}
+pci TEST_NODE-0000ff080 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff082 {Address:0000:ff:08.2 VendorID:8086 DeviceID:2f32 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff082 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff083 {Address:0000:ff:08.3 VendorID:8086 DeviceID:2f83 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 KernelDriverInUse:}
+pci TEST_NODE-0000ff083 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff086 {Address:0000:ff:08.6 VendorID:8086 DeviceID:2f86 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_0_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 0 Debug KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff086 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff090 {Address:0000:ff:09.0 VendorID:8086 DeviceID:2f90 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff090 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff092 {Address:0000:ff:09.2 VendorID:8086 DeviceID:2f33 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff092 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff093 {Address:0000:ff:09.3 VendorID:8086 DeviceID:2f93 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff093 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff096 {Address:0000:ff:09.6 VendorID:8086 DeviceID:2f96 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_QPI_LINK_1_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 QPI Link 1 Debug KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff096 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0b0 {Address:0000:ff:0b.0 VendorID:8086 DeviceID:2f81 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:}
+pci TEST_NODE-0000ff0b0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0b1 {Address:0000:ff:0b.1 VendorID:8086 DeviceID:2f36 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff0b1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0b2 {Address:0000:ff:0b.2 VendorID:8086 DeviceID:2f37 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_0__1_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 0 & 1 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff0b2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0b5 {Address:0000:ff:0b.5 VendorID:8086 DeviceID:2f3e ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_R3_QPI_LINK_2_MONITORING Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 R3 QPI Link 2 Monitoring KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff0b5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c0 {Address:0000:ff:0c.0 VendorID:8086 DeviceID:2fe0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c1 {Address:0000:ff:0c.1 VendorID:8086 DeviceID:2fe1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c2 {Address:0000:ff:0c.2 VendorID:8086 DeviceID:2fe2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c3 {Address:0000:ff:0c.3 VendorID:8086 DeviceID:2fe3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c4 {Address:0000:ff:0c.4 VendorID:8086 DeviceID:2fe4 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c5 {Address:0000:ff:0c.5 VendorID:8086 DeviceID:2fe5 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c6 {Address:0000:ff:0c.6 VendorID:8086 DeviceID:2fe6 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c6 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0c7 {Address:0000:ff:0c.7 VendorID:8086 DeviceID:2fe7 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0c7 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0d0 {Address:0000:ff:0d.0 VendorID:8086 DeviceID:2fe8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0d0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0d1 {Address:0000:ff:0d.1 VendorID:8086 DeviceID:2fe9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0d1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0d2 {Address:0000:ff:0d.2 VendorID:8086 DeviceID:2fea ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0d2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0d3 {Address:0000:ff:0d.3 VendorID:8086 DeviceID:2feb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_UNICAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Unicast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0d3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f0 {Address:0000:ff:0f.0 VendorID:8086 DeviceID:2ff8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-0000ff0f0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f1 {Address:0000:ff:0f.1 VendorID:8086 DeviceID:2ff9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-0000ff0f1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f2 {Address:0000:ff:0f.2 VendorID:8086 DeviceID:2ffa ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-0000ff0f2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f3 {Address:0000:ff:0f.3 VendorID:8086 DeviceID:2ffb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_BUFFERED_RING_AGENT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Buffered Ring Agent KernelDriverInUse:}
+pci TEST_NODE-0000ff0f3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f4 {Address:0000:ff:0f.4 VendorID:8086 DeviceID:2ffc ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0f4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f5 {Address:0000:ff:0f.5 VendorID:8086 DeviceID:2ffd ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0f5 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff0f6 {Address:0000:ff:0f.6 VendorID:8086 DeviceID:2ffe ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SYSTEM_ADDRESS_DECODER__BROADCAST_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 System Address Decoder & Broadcast Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff0f6 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff100 {Address:0000:ff:10.0 VendorID:8086 DeviceID:2f1d ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCIE_RING_INTERFACE Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCIe Ring Interface KernelDriverInUse:}
+pci TEST_NODE-0000ff100 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff101 {Address:0000:ff:10.1 VendorID:8086 DeviceID:2f34 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_PCIE_RING_INTERFACE Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 PCIe Ring Interface KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff101 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff105 {Address:0000:ff:10.5 VendorID:8086 DeviceID:2f1e ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff105 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff106 {Address:0000:ff:10.6 VendorID:8086 DeviceID:2f7d ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff106 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff107 {Address:0000:ff:10.7 VendorID:8086 DeviceID:2f1f ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_SCRATCHPAD__SEMAPHORE_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Scratchpad & Semaphore Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff107 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff120 {Address:0000:ff:12.0 VendorID:8086 DeviceID:2fa0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 KernelDriverInUse:}
+pci TEST_NODE-0000ff120 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff121 {Address:0000:ff:12.1 VendorID:8086 DeviceID:2f30 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff121 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff122 {Address:0000:ff:12.2 VendorID:8086 DeviceID:2f70 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_0_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 0 Debug KernelDriverInUse:}
+pci TEST_NODE-0000ff122 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff124 {Address:0000:ff:12.4 VendorID:8086 DeviceID:2f60 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff124 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff125 {Address:0000:ff:12.5 VendorID:8086 DeviceID:2f38 ClassID:1101 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1 Description:Performance counters: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff125 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff126 {Address:0000:ff:12.6 VendorID:8086 DeviceID:2f78 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_HOME_AGENT_1_DEBUG Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Home Agent 1 Debug KernelDriverInUse:}
+pci TEST_NODE-0000ff126 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff130 {Address:0000:ff:13.0 VendorID:8086 DeviceID:2fa8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff130 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff131 {Address:0000:ff:13.1 VendorID:8086 DeviceID:2f71 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff131 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff132 {Address:0000:ff:13.2 VendorID:8086 DeviceID:2faa ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-0000ff132 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff133 {Address:0000:ff:13.3 VendorID:8086 DeviceID:2fab ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-0000ff133 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff136 {Address:0000:ff:13.6 VendorID:8086 DeviceID:2fae ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_CHANNEL_0_1_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Channel 0/1 Broadcast KernelDriverInUse:}
+pci TEST_NODE-0000ff136 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff137 {Address:0000:ff:13.7 VendorID:8086 DeviceID:2faf ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_GLOBAL_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Global Broadcast KernelDriverInUse:}
+pci TEST_NODE-0000ff137 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff140 {Address:0000:ff:14.0 VendorID:8086 DeviceID:2fb0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_0_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 0 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff140 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff141 {Address:0000:ff:14.1 VendorID:8086 DeviceID:2fb1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_1_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 1 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff141 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff142 {Address:0000:ff:14.2 VendorID:8086 DeviceID:2fb2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_0_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 0 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff142 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff143 {Address:0000:ff:14.3 VendorID:8086 DeviceID:2fb3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_1_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 1 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff143 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff144 {Address:0000:ff:14.4 VendorID:8086 DeviceID:2fbc ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff144 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff145 {Address:0000:ff:14.5 VendorID:8086 DeviceID:2fbd ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff145 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff146 {Address:0000:ff:14.6 VendorID:8086 DeviceID:2fbe ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff146 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff147 {Address:0000:ff:14.7 VendorID:8086 DeviceID:2fbf ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_0__1 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 0 & 1 KernelDriverInUse:}
+pci TEST_NODE-0000ff147 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff150 {Address:0000:ff:15.0 VendorID:8086 DeviceID:2fb4 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_2_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 2 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff150 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff151 {Address:0000:ff:15.1 VendorID:8086 DeviceID:2fb5 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_0_CHANNEL_3_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 0 Channel 3 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff151 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff160 {Address:0000:ff:16.0 VendorID:8086 DeviceID:2f68 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff160 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff161 {Address:0000:ff:16.1 VendorID:8086 DeviceID:2f79 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_TARGET_ADDRESS_THERMAL__RAS_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Target Address, Thermal & RAS Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff161 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff162 {Address:0000:ff:16.2 VendorID:8086 DeviceID:2f6a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-0000ff162 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff163 {Address:0000:ff:16.3 VendorID:8086 DeviceID:2f6b ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_TARGET_ADDRESS_DECODER Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel Target Address Decoder KernelDriverInUse:}
+pci TEST_NODE-0000ff163 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff166 {Address:0000:ff:16.6 VendorID:8086 DeviceID:2f6e ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_CHANNEL_2_3_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Channel 2/3 Broadcast KernelDriverInUse:}
+pci TEST_NODE-0000ff166 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff167 {Address:0000:ff:16.7 VendorID:8086 DeviceID:2f6f ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_GLOBAL_BROADCAST Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO Global Broadcast KernelDriverInUse:}
+pci TEST_NODE-0000ff167 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff170 {Address:0000:ff:17.0 VendorID:8086 DeviceID:2fd0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_0_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 0 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff170 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff171 {Address:0000:ff:17.1 VendorID:8086 DeviceID:2fd1 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_1_THERMAL_CONTROL Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 1 Thermal Control KernelDriverInUse:hswep_uncore}
+pci TEST_NODE-0000ff171 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff172 {Address:0000:ff:17.2 VendorID:8086 DeviceID:2fd2 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_0_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 0 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff172 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff173 {Address:0000:ff:17.3 VendorID:8086 DeviceID:2fd3 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_INTEGRATED_MEMORY_CONTROLLER_1_CHANNEL_1_ERROR_REGISTERS Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Integrated Memory Controller 1 Channel 1 ERROR Registers KernelDriverInUse:}
+pci TEST_NODE-0000ff173 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff174 {Address:0000:ff:17.4 VendorID:8086 DeviceID:2fb8 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-0000ff174 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff175 {Address:0000:ff:17.5 VendorID:8086 DeviceID:2fb9 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-0000ff175 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff176 {Address:0000:ff:17.6 VendorID:8086 DeviceID:2fba ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-0000ff176 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff177 {Address:0000:ff:17.7 VendorID:8086 DeviceID:2fbb ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_DDRIO_VMSE_2__3 Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 DDRIO (VMSE) 2 & 3 KernelDriverInUse:}
+pci TEST_NODE-0000ff177 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1e0 {Address:0000:ff:1e.0 VendorID:8086 DeviceID:2f98 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-0000ff1e0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1e1 {Address:0000:ff:1e.1 VendorID:8086 DeviceID:2f99 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-0000ff1e1 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1e2 {Address:0000:ff:1e.2 VendorID:8086 DeviceID:2f9a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-0000ff1e2 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1e3 {Address:0000:ff:1e.3 VendorID:8086 DeviceID:2fc0 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-0000ff1e3 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1e4 {Address:0000:ff:1e.4 VendorID:8086 DeviceID:2f9c ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_POWER_CONTROL_UNIT Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 Power Control Unit KernelDriverInUse:}
+pci TEST_NODE-0000ff1e4 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1f0 {Address:0000:ff:1f.0 VendorID:8086 DeviceID:2f88 ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_VCU Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 VCU KernelDriverInUse:}
+pci TEST_NODE-0000ff1f0 with label map[nodename:TEST_NODE]
+
+Creating PCI Device: TEST_NODE-0000ff1f2 {Address:0000:ff:1f.2 VendorID:8086 DeviceID:2f8a ClassID:0880 IOMMUGroup: NodeName:TEST_NODE ResourceName:intel.com/XEON_E7_V3_XEON_E5_V3_CORE_I7_VCU Description:System peripheral: Intel Corporation Xeon E7 v3/Xeon E5 v3/Core i7 VCU KernelDriverInUse:}
+pci TEST_NODE-0000ff1f2 with label map[nodename:TEST_NODE]
+
+    pcidevice_controller_test.go:44: {0000:08:00.0 10de 1eb8 0302  TEST_NODE nvidia.com/TU104GL_TESLA_T4 3D controller: NVIDIA Corporation TU104GL [Tesla T4] nvidia}
+--- PASS: Test_reconcilePCIDevices (0.29s)
+=== RUN   Test_identifyPCIBridgeAddresses
+--- PASS: Test_identifyPCIBridgeAddresses (0.26s)
+PASS
+coverage: 72.1% of statements
+ok  	github.com/harvester/pcidevices/pkg/controller/pcidevice	0.570s	coverage: 72.1% of statements
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+=== RUN   TestHandler_getOrphanedPCIDevices
+=== RUN   TestHandler_getOrphanedPCIDevices/One_PCIDevice_bound_to_vfio-pci_and_zero_PCIDeviceClaims
+=== RUN   TestHandler_getOrphanedPCIDevices/Two_PCIDevices_bound_to_vfio-pci_and_one_PCIDeviceClaim
+--- PASS: TestHandler_getOrphanedPCIDevices (0.00s)
+    --- PASS: TestHandler_getOrphanedPCIDevices/One_PCIDevice_bound_to_vfio-pci_and_zero_PCIDeviceClaims (0.00s)
+    --- PASS: TestHandler_getOrphanedPCIDevices/Two_PCIDevices_bound_to_vfio-pci_and_one_PCIDeviceClaim (0.00s)
+=== RUN   Test_permitHostDeviceInKubevirtWithNoDevices
+--- PASS: Test_permitHostDeviceInKubevirtWithNoDevices (0.00s)
+=== RUN   Test_permitHostDeviceInKubevirtWithoutExternalResourceDevices
+--- PASS: Test_permitHostDeviceInKubevirtWithoutExternalResourceDevices (0.00s)
+=== RUN   Test_permitHostDeviceInKubevirtWithExternalResourceDevices
+--- PASS: Test_permitHostDeviceInKubevirtWithExternalResourceDevices (0.00s)
+PASS
+coverage: 12.2% of statements
+ok  	github.com/harvester/pcidevices/pkg/controller/pcideviceclaim	0.017s	coverage: 12.2% of statements
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+2023/11/24 10:00:11 **** default SysPath /tmp/umockdev.3E20E2/sys/bus/pci/devices ****
+=== RUN   Test_ReconcileEnable
+2023/11/24 10:00:11 **** CurrentVFConfigured: read file at /tmp/umockdev.3E20E2/sys/bus/pci/devices/0000:04:00.0/sriov_numvfs current vf 4 ****
+2023/11/24 10:00:11 ****ensureDeviceIsConfigured: vfs 4 ****
+    sriovdevice_controller_test.go:69: &{{ } {mock-eno49      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {0000:04:00.0 mock 4} {[] [] sriovNetworkDeviceEnabled}}
+--- PASS: Test_ReconcileEnable (0.00s)
+=== RUN   Test_ReconcileDisable
+2023/11/24 10:00:11 **** CurrentVFConfigured: read file at /tmp/umockdev.3E20E2/sys/bus/pci/devices/0000:04:00.0/sriov_numvfs current vf 4 ****
+--- PASS: Test_ReconcileDisable (0.00s)
+
+
+=== RUN   Test_SetupSriovDevices
+time="2023-11-24T10:00:11Z" level=info msg="found device br-475242ed20a4 on node mock with spec br-475242ed20a4 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device br-bb11c029dc21 on node mock with spec br-bb11c029dc21 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device docker0 on node mock with spec docker0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device dummy0 on node mock with spec dummy0 (virtual)"
+
+time="2023-11-24T10:00:11Z" level=info msg="found device eno49 on node mock with spec eno49"
+2023/11/24 10:00:11 **** get srio dev name:mock-eno49 labels:map[nodename:mock] annotation:map[sriov.devices.harvesterhi.io/interface-name:eno49] Address:0000:04:00.0 NodeName:mock NumVFs:0****
+
+time="2023-11-24T10:00:11Z" level=info msg="found device eno50 on node mock with spec eno50"
+2023/11/24 10:00:11 **** get srio dev name:mock-eno50 labels:map[nodename:mock] annotation:map[sriov.devices.harvesterhi.io/interface-name:eno50] Address:0000:04:00.1 NodeName:mock NumVFs:0****
+
+time="2023-11-24T10:00:11Z" level=info msg="found device tailscale0 on node mock with spec tailscale0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device veth95d4597 on node mock with spec veth95d4597 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device veth9f41c36 on node mock with spec veth9f41c36 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device vethac08834 on node mock with spec vethac08834 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device vethe39be70 on node mock with spec vethe39be70 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device virbr0 on node mock with spec virbr0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device virbr1 on node mock with spec virbr1 (virtual)"
+--- PASS: Test_SetupSriovDevices (0.01s)
+PASS
+coverage: 61.8% of statements
+ok  	github.com/harvester/pcidevices/pkg/controller/sriovdevice	0.026s	coverage: 61.8% of statements
+?   	github.com/harvester/pcidevices/pkg/crd	[no test files]
+?   	github.com/harvester/pcidevices/pkg/deviceplugins	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/clientset/versioned	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/clientset/versioned/fake	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/clientset/versioned/scheme	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/clientset/versioned/typed/devices.harvesterhci.io/v1beta1	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/clientset/versioned/typed/devices.harvesterhci.io/v1beta1/fake	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/controllers/devices.harvesterhci.io	[no test files]
+?   	github.com/harvester/pcidevices/pkg/generated/controllers/devices.harvesterhci.io/v1beta1	[no test files]
+
+
+
+=== RUN   TestGroupMapForPCIDevices
+=== RUN   TestGroupMapForPCIDevices/Test_GroupMapForPCIDevices
+*** groupMap ****
+add map 0000:00:1c.0 -> 9
+add map 0000:00:1c.5 -> 9
+add map 0000:06:00.0 -> 9
+add map 0000:05:00.0 -> 9
+add map 0000:3e:04.2 -> 27
+add map 0000:3e:04.0 -> 27
+add map 0000:3e:04.3 -> 27
+add map 0000:3e:04.1 -> 27
+--- PASS: TestGroupMapForPCIDevices (0.00s)
+--- PASS: TestGroupMapForPCIDevices/Test_GroupMapForPCIDevices (0.00s)
+PASS
+coverage: 41.9% of statements
+ok  	github.com/harvester/pcidevices/pkg/iommu	0.011s	coverage: 41.9% of statements
+?   	github.com/harvester/pcidevices/pkg/util/fakeclients	[no test files]
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+
+=== RUN   Test_MatchAllNodes
+2023/11/24 10:00:11 ****Test_MatchAllNodes: nics [eno49] ****
+--- PASS: Test_MatchAllNodes (0.00s)
+=== RUN   Test_NoMatchSpecificNode
+
+2023/11/24 10:00:11 ****Test_NoMatchSpecificNode: nics [] ****
+--- PASS: Test_NoMatchSpecificNode (0.00s)
+=== RUN   Test_MatchSpecificNode
+
+2023/11/24 10:00:11 ****Test_MatchSpecificNode: nics [eno50] ****
+--- PASS: Test_MatchSpecificNode (0.00s)
+=== RUN   Test_GenerateSriovNics
+
+2023/11/24 10:00:11 **** Test_GenerateSriovNics: nics net (13 NICs)****
+time="2023-11-24T10:00:11Z" level=info msg="found device br-475242ed20a4 on node fake with spec br-475242ed20a4 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device br-bb11c029dc21 on node fake with spec br-bb11c029dc21 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device docker0 on node fake with spec docker0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device dummy0 on node fake with spec dummy0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device eno49 on node fake with spec eno49"
+2023/11/24 10:00:11 **** get srio dev name:fake-eno49 labels:map[nodename:fake] annotation:map[sriov.devices.harvesterhi.io/interface-name:eno49] Address:0000:04:00.0 NodeName:fake NumVFs:0****
+time="2023-11-24T10:00:11Z" level=info msg="found device eno50 on node fake with spec eno50"
+2023/11/24 10:00:11 **** get srio dev name:fake-eno50 labels:map[nodename:fake] annotation:map[sriov.devices.harvesterhi.io/interface-name:eno50] Address:0000:04:00.1 NodeName:fake NumVFs:0****
+time="2023-11-24T10:00:11Z" level=info msg="found device tailscale0 on node fake with spec tailscale0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device veth95d4597 on node fake with spec veth95d4597 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device veth9f41c36 on node fake with spec veth9f41c36 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device vethac08834 on node fake with spec vethac08834 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device vethe39be70 on node fake with spec vethe39be70 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device virbr0 on node fake with spec virbr0 (virtual)"
+time="2023-11-24T10:00:11Z" level=info msg="found device virbr1 on node fake with spec virbr1 (virtual)"
+--- PASS: Test_GenerateSriovNics (0.01s)
+
+=== RUN   Test_ConfigureAndVerifyVF
+2023/11/24 10:00:11 **** CurrentVFConfigured: read file at /tmp/umockdev.3E20E2/sys/bus/pci/devices/0000:04:00.0/sriov_numvfs current vf 4 ****
+--- PASS: Test_ConfigureAndVerifyVF (0.00s)
+
+
+=== RUN   Test_IdentifyManagementNics
+2023/11/24 10:00:11 **** Test_IdentifyManagementNics: identify nics [] ****
+--- PASS: Test_IdentifyManagementNics (0.00s)
+PASS
+
+coverage: 40.3% of statements
+ok  	github.com/harvester/pcidevices/pkg/util/nichelper	0.035s	coverage: 40.3% of statements
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+
+=== RUN   Test_SetupGHWNetworkSnapshot
+    ghw_snapshots_test.go:14: 0
+--- PASS: Test_SetupGHWNetworkSnapshot (0.25s)
+PASS
+coverage: 69.2% of statements
+ok  	github.com/harvester/pcidevices/pkg/util/testhelper	0.258s	coverage: 69.2% of statements
+ERROR: ld.so: object 'libumockdev-preload.so.0' from LD_PRELOAD cannot be preloaded (cannot open shared object file): ignored.
+
+
+
+=== RUN   Test_PCIDeviceClaimWithoutIommu
+time="2023-11-24T10:00:12Z" level=error msg="pcidevice node1dev1noiommu has no iommuGroup available"
+--- PASS: Test_PCIDeviceClaimWithoutIommu (0.00s)
+
+
+=== RUN   Test_PCIDeviceClaimWithIommu
+--- PASS: Test_PCIDeviceClaimWithIommu (0.00s)
+
+
+=== RUN   Test_DeletePCIDeviceClaimInUse
+time="2023-11-24T10:00:12Z" level=error msg="pcideviceclaim node1dev1 is already in use with vm vm-with-iommu-devices in namespace default"
+--- PASS: Test_DeletePCIDeviceClaimInUse (0.00s)
+
+
+=== RUN   Test_DeletePCIDeviceClaimNotInUse
+--- PASS: Test_DeletePCIDeviceClaimNotInUse (0.00s)
+
+
+=== RUN   Test_createCapabilitiesPatch
+--- PASS: Test_createCapabilitiesPatch (0.01s)
+
+
+=== RUN   Test_DisableSRIOVDeviceWithClaims
+time="2023-11-24T10:00:12Z" level=error msg="found pcideviceclaims: node1dev1,node1dev2 related to sriovnetworkdevice node1-eno1 in use"
+--- PASS: Test_DisableSRIOVDeviceWithClaims (0.00s)
+
+
+=== RUN   Test_DisableSRIOVDeviceWithoutClaims
+--- PASS: Test_DisableSRIOVDeviceWithoutClaims (0.00s)
+
+
+=== RUN   Test_DeleteSRIOVDeviceWithClaims
+time="2023-11-24T10:00:12Z" level=error msg="found pcideviceclaims: node1dev1,node1dev2 related to sriovnetworkdevice node1-eno1 in use"
+--- PASS: Test_DeleteSRIOVDeviceWithClaims (0.00s)
+
+
+=== RUN   Test_DeleteSRIOVDeviceWithoutClaims
+--- PASS: Test_DeleteSRIOVDeviceWithoutClaims (0.00s)
+
+
+==== RUN   Test_VMWithNoDevices
+--- PASS: Test_VMWithNoDevices (0.00s)
+
+
+=== RUN   Test_VMWithoutIommuDevices
+--- PASS: Test_VMWithoutIommuDevices (0.00s)
+
+
+=== RUN   Test_VMWithIommuDevices
+time="2023-12-19T13:41:27Z" level=info msg="pciDevicesInVM: [node1dev1]"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev1      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.0 8086  0200 89 node1 fake.com/device1 fake device 1 ixgbevf}} admin"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev2      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.1 8086  0200 89 node1 fake.com/device2 fake device 2 ixgbevf}} admin"
+time="2023-12-19T13:41:27Z" level=info msg="devicesNeeded: {{ } {node1dev2      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.1 8086  0200 89 node1 fake.com/device2 fake device 2 ixgbevf}} admin"
+--- PASS: Test_VMWithIommuDevices (0.00s)
+
+
+=== RUN   Test_VMWithAllIommuDevices
+time="2023-12-19T13:41:27Z" level=info msg="pciDevicesInVM: [node1dev1 node1dev2]"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev1      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.0 8086  0200 89 node1 fake.com/device1 fake device 1 ixgbevf}} admin"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev2      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.1 8086  0200 89 node1 fake.com/device2 fake device 2 ixgbevf}} admin"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev1      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.0 8086  0200 89 node1 fake.com/device1 fake device 1 ixgbevf}} admin"
+time="2023-12-19T13:41:27Z" level=info msg="possiblePCIDeviceRequirement: {{ } {node1dev2      0 0001-01-01 00:00:00 +0000 UTC <nil> <nil> map[] map[] [] []  []} {} {0000:04:10.1 8086  0200 89 node1 fake.com/device2 fake device 2 ixgbevf}} admin"
+--- PASS: Test_VMWithAllIommuDevices (0.00s)
+
+
+=== RUN   Test_VMWithoutValidDeviceName
+time="2023-12-19T13:41:27Z" level=info msg="pciDevicesInVM: []"
+--- PASS: Test_VMWithoutValidDeviceName (0.00s)
+
+
+PASS
+coverage: 37.5% of statements
+ok      github.com/harvester/pcidevices/pkg/webhook     0.018s  coverage: 37.5% of statements
+
+
+=== RUN   TestAPIs
+2023/11/24 10:00:19 **** vmName test-vm****
+Running Suite: Controller Suite - /go/src/github.com/harvester/pcidevices/tests/integration
+===========================================================================================
+Random Seed: [1m1700820019[0m
+
+Will run [1m3[0m of [1m3[0m specs
+time="2023-11-24T10:00:24Z" level=info msg="Applying CRD pcidevices.devices.harvesterhci.io"
+time="2023-11-24T10:00:24Z" level=info msg="Applying CRD pcideviceclaims.devices.harvesterhci.io"
+time="2023-11-24T10:00:24Z" level=info msg="Applying CRD sriovnetworkdevices.devices.harvesterhci.io"
+time="2023-11-24T10:00:24Z" level=info msg="Applying CRD nodes.devices.harvesterhci.io"
+time="2023-11-24T10:00:24Z" level=info msg="Waiting for CRD nodes.devices.harvesterhci.io to become available"
+time="2023-11-24T10:00:24Z" level=info msg="Done waiting for CRD nodes.devices.harvesterhci.io to become available"
+time="2023-11-24T10:00:24Z" level=info msg="add mutation handler for [pods]. (Pod)"
+time="2023-11-24T10:00:24Z" level=info msg="add mutation handler for [virtualmachines].kubevirt.io (VirtualMachine)"
+time="2023-11-24T10:00:24Z" level=info msg="add validation handler for [sriovnetworkdevices].devices.harvesterhci.io (SRIOVNetworkDevice)"
+time="2023-11-24T10:00:24Z" level=info msg="add validation handler for [pcideviceclaims].devices.harvesterhci.io (PCIDeviceClaim)"
+time="2023-11-24T10:00:24Z" level=info msg="generated self-signed CA certificate CN=dynamiclistener-ca@1700820024,O=dynamiclistener-org: notBefore=2023-11-24 10:00:24.951572128 +0000 UTC notAfter=2033-11-21 10:00:24.951572128 +0000 UTC"
+time="2023-11-24T10:00:24Z" level=info msg="Listening on :8443"
+time="2023-11-24T10:00:24Z" level=info msg="certificate CN=dynamic,O=dynamic signed by CN=dynamiclistener-ca@1700820024,O=dynamiclistener-org: notBefore=2023-11-24 10:00:24 +0000 UTC notAfter=2024-11-23 10:00:24 +0000 UTC"
+time="2023-11-24T10:00:24Z" level=warning msg="dynamiclistener [::]:8443: no cached certificate available for preload - deferring certificate load until storage initialization or first client request"
+time="2023-11-24T10:00:24Z" level=info msg="Creating new TLS secret for harvester-system/pcidevices-webhook-tls (count: 1): map[listener.cattle.io/cn-pcidevices-webhook.harvester-system.svc:pcidevices-webhook.harvester-system.svc listener.cattle.io/fingerprint:SHA1=C67EA630ABE5DF95940BAFCF74650443986A304A]"
+time="2023-11-24T10:00:24Z" level=info msg="Active TLS secret harvester-system/pcidevices-webhook-tls (ver=220) (count 1): map[listener.cattle.io/cn-pcidevices-webhook.harvester-system.svc:pcidevices-webhook.harvester-system.svc listener.cattle.io/fingerprint:SHA1=C67EA630ABE5DF95940BAFCF74650443986A304A]"
+time="2023-11-24T10:00:25Z" level=info msg="Starting kubevirt.io/v1, Kind=VirtualMachine controller"
+time="2023-11-24T10:00:25Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDevice controller"
+time="2023-11-24T10:00:25Z" level=info msg="Starting /v1, Kind=Secret controller"
+time="2023-11-24T10:00:25Z" level=info msg="Starting apiextensions.k8s.io/v1, Kind=CustomResourceDefinition controller"
+time="2023-11-24T10:00:25Z" level=info msg="Sleeping for 15 seconds then applying webhook config"
+time="2023-11-24T10:00:25Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDeviceClaim controller"
+time="2023-11-24T10:00:25Z" level=info msg="Starting apiregistration.k8s.io/v1, Kind=APIService controller"
+time="2023-11-24T10:00:25Z" level=info msg="Updating TLS secret for harvester-system/pcidevices-webhook-tls (count: 1): map[listener.cattle.io/cn-pcidevices-webhook.harvester-system.svc:pcidevices-webhook.harvester-system.svc listener.cattle.io/fingerprint:SHA1=C67EA630ABE5DF95940BAFCF74650443986A304A]"
+**** wait before running tests ****
+time="2023-11-24T10:00:25Z" level=info msg="Starting /v1, Kind=Node controller"
+time="2023-11-24T10:00:35Z" level=info msg="cleaning pcidevices for node node2"
+2023/11/24 10:00:35 **** delete pdc dev1node2 ****
+2023/11/24 10:00:35 **** delete pdc dev2node2 ****
+2023/11/24 10:00:35 **** delete pd dev1node2 ****
+2023/11/24 10:00:35 **** delete pd dev2node2 ****
+[38;5;243m------------------------------[0m
+[38;5;10m• [SLOW TEST] [5.015 seconds][0m
+[0mrun node deletion tests [38;5;243mdelete node2 and reconcile devices[0m
+[38;5;243m/go/src/github.com/harvester/pcidevices/tests/integration/node_test.go:144[0m
+[38;5;243m------------------------------[0m
+[38;5;10m•[0mtime="2023-11-24T10:00:40Z" level=info msg="ignoring pod virt-launcher-fake in ns default as no valid labels found"
+[38;5;10m•[0mtime="2023-11-24T10:00:40Z" level=info msg="Shutting down /v1, Kind=Secret workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down kubevirt.io/v1, Kind=VirtualMachine workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down devices.harvesterhci.io/v1beta1, Kind=PCIDevice workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down apiextensions.k8s.io/v1, Kind=CustomResourceDefinition workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down /v1, Kind=Node workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down devices.harvesterhci.io/v1beta1, Kind=PCIDeviceClaim workers"
+time="2023-11-24T10:00:40Z" level=info msg="Shutting down apiregistration.k8s.io/v1, Kind=APIService workers"
+
+
+[38;5;10m[1mRan 3 of 3 Specs in 21.510 seconds[0m
+[38;5;10m[1mSUCCESS![0m -- [38;5;10m[1m3 Passed[0m | [38;5;9m[1m0 Failed[0m | [38;5;11m[1m0 Pending[0m | [38;5;14m[1m0 Skipped[0m
+--- PASS: TestAPIs (21.51s)
+PASS
+ok  	github.com/harvester/pcidevices/tests/integration	21.521s

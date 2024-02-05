@@ -1,0 +1,223 @@
+Example for "pcidevice"
+  apiVersion: devices.harvesterhci.io/v1beta1
+  kind: PCIDevice
+  metadata:
+    annotations:
+      harvesterhci.io/pcideviceDriver: ixgbe
+    labels:
+      nodename: harvester-ktmg4
+    name: harvester-ktmg4-000004000
+  spec: {}
+  status:
+    address: "0000:04:00.0"
+    classId: "0200"
+    description: 'Ethernet controller: Intel Corporation 82599ES 10-Gigabit SFI/SFP+
+      Network Connection'
+    deviceId: 10fb
+    iommuGroup: "37"
+    kernelDriverInUse: vfio-pci
+    nodeName: harvester-ktmg4
+    resourceName: intel.com/82599ES_10GIGABIT_SFI_SFP_NETWORK_CONNECTION
+    vendorId: "8086"
+
+Example for "PCIDeviceClaim"
+  apiVersion: devices.harvesterhci.io/v1beta1
+  kind: PCIDeviceClaim
+  metadata:
+    creationTimestamp: "2024-01-15T09:54:11Z"
+    name: harvester-ktmg4-000004000
+    ownerReferences:
+    - apiVersion: devices.harvesterhci.io/v1beta1
+      kind: PCIDevice
+      name: harvester-ktmg4-000004000
+      uid: e7552d03-db0c-4c65-bae6-8d27a460fcca
+  spec:
+    address: "0000:04:00.0"
+    nodeName: harvester-ktmg4
+    userName: admin
+  status:
+    kernelDriverToUnbind: ixgbe
+    passthroughEnabled: true
+
+Example for SRIOVNetworkDevice
+  apiVersion: devices.harvesterhci.io/v1beta1
+  kind: SRIOVNetworkDevice
+  metadata:
+    annotations:
+      sriov.devices.harvesterhi.io/interface-name: eno49
+    labels:
+      nodename: harvester-zh57h
+    name: harvester-zh57h-eno49
+    uid: a32a2736-79ec-48cb-b289-5bb8439d33a1
+  spec:
+    address: "0000:04:00.0"
+    nodeName: harvester-zh57h
+    numVFs: 0
+
+Example for group path:
+    **** GroupPaths ****
+    add path /sys/kernel/iommu_groups/0/devices/0000:00:00.0
+    add path /sys/kernel/iommu_groups/1/devices/0000:00:01.0
+    add path /sys/kernel/iommu_groups/10/devices/0000:00:14.0
+    add path /sys/kernel/iommu_groups/10/devices/0000:00:14.2
+    add path /sys/kernel/iommu_groups/11/devices/0000:00:14.3
+    add path /sys/kernel/iommu_groups/12/devices/0000:00:15.0
+    add path /sys/kernel/iommu_groups/12/devices/0000:00:15.1
+    add path /sys/kernel/iommu_groups/13/devices/0000:00:16.0
+    add path /sys/kernel/iommu_groups/13/devices/0000:00:16.3
+    add path /sys/kernel/iommu_groups/14/devices/0000:00:1c.0
+    add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.0
+    add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.3
+    add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.4
+    add path /sys/kernel/iommu_groups/15/devices/0000:00:1f.5
+    add path /sys/kernel/iommu_groups/16/devices/0000:01:00.0
+    add path /sys/kernel/iommu_groups/17/devices/0000:74:00.0
+    add path /sys/kernel/iommu_groups/18/devices/0000:02:00.0
+    add path /sys/kernel/iommu_groups/19/devices/0000:03:02.0
+    add path /sys/kernel/iommu_groups/2/devices/0000:00:02.0
+    add path /sys/kernel/iommu_groups/20/devices/0000:03:04.0
+    add path /sys/kernel/iommu_groups/21/devices/0000:04:00.0
+    add path /sys/kernel/iommu_groups/3/devices/0000:00:04.0
+    add path /sys/kernel/iommu_groups/4/devices/0000:00:07.0
+    add path /sys/kernel/iommu_groups/5/devices/0000:00:07.3
+    add path /sys/kernel/iommu_groups/6/devices/0000:00:0a.0
+    add path /sys/kernel/iommu_groups/7/devices/0000:00:0d.0
+    add path /sys/kernel/iommu_groups/7/devices/0000:00:0d.3
+    add path /sys/kernel/iommu_groups/8/devices/0000:00:0e.0
+    add path /sys/kernel/iommu_groups/8/devices/10000:e0:01.0
+    add path /sys/kernel/iommu_groups/8/devices/10000:e0:01.2
+    add path /sys/kernel/iommu_groups/8/devices/10000:e1:00.0
+    add path /sys/kernel/iommu_groups/9/devices/0000:00:12.0
+
+Exampel for group map:
+    *** groupMap ****
+    add map 0000:00:00.0 -> 0
+    add map 0000:00:01.0 -> 1
+    add map 0000:00:14.0 -> 10
+    add map 0000:00:14.2 -> 10
+    add map 0000:00:14.3 -> 11
+    add map 0000:00:15.0 -> 12
+    add map 0000:00:15.1 -> 12
+    add map 0000:00:16.0 -> 13
+    add map 0000:00:16.3 -> 13
+    add map 0000:00:1c.0 -> 14
+    add map 0000:00:1f.0 -> 15
+    add map 0000:00:1f.3 -> 15
+    add map 0000:00:1f.4 -> 15
+    add map 0000:00:1f.5 -> 15
+    add map 0000:01:00.0 -> 16
+    add map 0000:74:00.0 -> 17
+    add map 0000:02:00.0 -> 18
+    add map 0000:03:02.0 -> 19
+    add map 0000:00:02.0 -> 2
+    add map 0000:03:04.0 -> 20
+    add map 0000:04:00.0 -> 21
+    add map 0000:00:04.0 -> 3
+    add map 0000:00:07.0 -> 4
+    add map 0000:00:07.3 -> 5
+    add map 0000:00:0a.0 -> 6
+    add map 0000:00:0d.0 -> 7
+    add map 0000:00:0d.3 -> 7
+    add map 0000:00:0e.0 -> 8
+    add map 10000:e0:01.0 -> 8
+    add map 10000:e0:01.2 -> 8
+    add map 10000:e1:00.0 -> 8
+    add map 0000:00:12.0 -> 9
+
+
+time="2024-01-12T08:11:46Z" level=info msg="Applying CRD pcidevices.devices.harvesterhci.io"
+time="2024-01-12T08:11:46Z" level=info msg="Applying CRD pcideviceclaims.devices.harvesterhci.io"
+time="2024-01-12T08:11:46Z" level=info msg="Applying CRD sriovnetworkdevices.devices.harvesterhci.io"
+time="2024-01-12T08:11:46Z" level=info msg="Applying CRD nodes.devices.harvesterhci.io"
+time="2024-01-12T08:11:50Z" level=info msg="Registering PCI Device Claims controller"
+time="2024-01-12T08:11:50Z" level=info msg="Loading driver vfio-pci"
+time="2024-01-12T08:11:50Z" level=info msg="Loading driver vfio_iommu_type1"
+time="2024-01-12T08:11:51Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDevice controller"
+time="2024-01-12T08:11:51Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=Node controller"
+time="2024-01-12T08:11:51Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDeviceClaim controller"
+time="2024-01-12T08:11:51Z" level=info msg="Starting /v1, Kind=Node controller"
+time="2024-01-12T08:11:51Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=SRIOVNetworkDevice controller"
+time="2024-01-12T08:11:51Z" level=info msg="Starting network.harvesterhci.io/v1beta1, Kind=VlanConfig controller"
+time="2024-01-12T08:11:51Z" level=info msg="add mutation handler for [pods]. (Pod)"
+time="2024-01-12T08:11:51Z" level=info msg="add mutation handler for [virtualmachines].kubevirt.io (VirtualMachine)"
+time="2024-01-12T08:11:51Z" level=info msg="add validation handler for [sriovnetworkdevices].devices.harvesterhci.io (SRIOVNetworkDevice)"
+time="2024-01-12T08:11:51Z" level=info msg="add validation handler for [pcideviceclaims].devices.harvesterhci.io (PCIDeviceClaim)"
+time="2024-01-12T08:11:51Z" level=info msg="Active TLS secret harvester-system/pcidevices-webhook-tls (ver=281351) (count 1): map[listener.cattle.io/cn-pcidevices-webhook.harvester-system.svc:pcidevices-webhook.harvester-system.svc listener.cattle.io/fingerprint:SHA1=FC39F95CDFAF4B16F78A4CF7A06C008CD4536E04]"
+time="2024-01-12T08:11:51Z" level=info msg="Listening on :8443"
+
+time="2024-01-12T08:11:53Z" level=info msg="skip management nics [ens6]"
+time="2024-01-12T08:11:53Z" level=info msg="skip cluster net nics %v[ens5]"
+time="2024-01-12T08:11:53Z" level=info msg="skipping manage nics [ens6 ens5]"
+time="2024-01-12T08:11:58Z" level=info msg="skip manage nics with pciAddresses: [0000:00:06.0 0000:00:05.0]"
+time="2024-01-12T08:11:58Z" level=info msg="skip bridge address []"
+
+**** GroupPaths ****
+*** groupMap ****
+time="2024-01-12T08:12:00Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDevice controller"
+time="2024-01-12T08:12:00Z" level=info msg="Starting /v1, Kind=Secret controller"
+time="2024-01-12T08:12:00Z" level=info msg="Starting devices.harvesterhci.io/v1beta1, Kind=PCIDeviceClaim controller"
+time="2024-01-12T08:12:00Z" level=info msg="Starting kubevirt.io/v1, Kind=VirtualMachine controller"
+time="2024-01-12T08:12:00Z" level=info msg="Starting apiextensions.k8s.io/v1, Kind=CustomResourceDefinition controller"
+time="2024-01-12T08:12:00Z" level=info msg="Sleeping for 15 seconds then applying webhook config"
+time="2024-01-12T08:12:00Z" level=info msg="Starting apiregistration.k8s.io/v1, Kind=APIService controller"
+time="2024-01-12T08:12:00Z" level=info msg="Updating TLS secret for harvester-system/pcidevices-webhook-tls (count: 1): map[listener.cattle.io/cn-pcidevices-webhook.harvester-system.svc:pcidevices-webhook.harvester-system.svc listener.cattle.io/fingerprint:SHA1=FC39F95CDFAF4B16F78A4CF7A06C008CD4536E04]"
+time="2024-01-12T08:12:01Z" level=info msg="skip cluster net nics %v[ens5]"
+time="2024-01-12T08:12:01Z" level=info msg="skip management nics [ens6]"
+time="2024-01-12T08:12:01Z" level=info msg="found device bonding_masters on node harvester-node-0 with spec bonding_masters"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali0c77b0c31ff on node harvester-node-0 with spec cali0c77b0c31ff (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali0e04a0fc4c4 on node harvester-node-0 with spec cali0e04a0fc4c4 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali1060f214e51 on node harvester-node-0 with spec cali1060f214e51 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali1256a4ed624 on node harvester-node-0 with spec cali1256a4ed624 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali150ad877e37 on node harvester-node-0 with spec cali150ad877e37 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali1bb7a3ec40a on node harvester-node-0 with spec cali1bb7a3ec40a (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali1c11707ffe5 on node harvester-node-0 with spec cali1c11707ffe5 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali215f598bb61 on node harvester-node-0 with spec cali215f598bb61 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali23fb843bd2b on node harvester-node-0 with spec cali23fb843bd2b (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali2dc4e1e9e1d on node harvester-node-0 with spec cali2dc4e1e9e1d (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali313f780fac6 on node harvester-node-0 with spec cali313f780fac6 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali315cd49646e on node harvester-node-0 with spec cali315cd49646e (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali357e74cb972 on node harvester-node-0 with spec cali357e74cb972 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali3bfffe1d0f9 on node harvester-node-0 with spec cali3bfffe1d0f9 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali3cf347f9bea on node harvester-node-0 with spec cali3cf347f9bea (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali3ed15585974 on node harvester-node-0 with spec cali3ed15585974 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali42447717e17 on node harvester-node-0 with spec cali42447717e17 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali47a833025e7 on node harvester-node-0 with spec cali47a833025e7 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali495c03c7d0e on node harvester-node-0 with spec cali495c03c7d0e (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali54ac39d2d69 on node harvester-node-0 with spec cali54ac39d2d69 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali55dc433a1cf on node harvester-node-0 with spec cali55dc433a1cf (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali5d2300bab9e on node harvester-node-0 with spec cali5d2300bab9e (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali6c36513b117 on node harvester-node-0 with spec cali6c36513b117 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali6fd7965b97a on node harvester-node-0 with spec cali6fd7965b97a (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali74d6f078d5b on node harvester-node-0 with spec cali74d6f078d5b (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali7be3e77c14b on node harvester-node-0 with spec cali7be3e77c14b (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali886e413652a on node harvester-node-0 with spec cali886e413652a (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali8c246670003 on node harvester-node-0 with spec cali8c246670003 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali90afce3772c on node harvester-node-0 with spec cali90afce3772c (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali96bd0945fc3 on node harvester-node-0 with spec cali96bd0945fc3 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cali9adb0e3cf83 on node harvester-node-0 with spec cali9adb0e3cf83 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calia86feb86a10 on node harvester-node-0 with spec calia86feb86a10 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calia88e477d8cc on node harvester-node-0 with spec calia88e477d8cc (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calic1e96a01c3e on node harvester-node-0 with spec calic1e96a01c3e (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calic35f201ea67 on node harvester-node-0 with spec calic35f201ea67 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calic608f970c1a on node harvester-node-0 with spec calic608f970c1a (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calicef44bf07ed on node harvester-node-0 with spec calicef44bf07ed (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calid3180c07331 on node harvester-node-0 with spec calid3180c07331 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calid432b22b750 on node harvester-node-0 with spec calid432b22b750 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calid6e8978e902 on node harvester-node-0 with spec calid6e8978e902 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calid9ce713348c on node harvester-node-0 with spec calid9ce713348c (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calidf623f0ca86 on node harvester-node-0 with spec calidf623f0ca86 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calidfbfda79e03 on node harvester-node-0 with spec calidfbfda79e03 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calie3033af73b4 on node harvester-node-0 with spec calie3033af73b4 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calie5427b09b8c on node harvester-node-0 with spec calie5427b09b8c (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calief532c4e402 on node harvester-node-0 with spec calief532c4e402 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device calif08a745ae11 on node harvester-node-0 with spec calif08a745ae11 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cluster-net-bo on node harvester-node-0 with spec cluster-net-bo (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device cluster-net-br on node harvester-node-0 with spec cluster-net-br (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device ens5 on node harvester-node-0 with spec ens5"
+time="2024-01-12T08:12:01Z" level=info msg="found device ens6 on node harvester-node-0 with spec ens6"
+time="2024-01-12T08:12:01Z" level=info msg="found device flannel.1 on node harvester-node-0 with spec flannel.1 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device mgmt-bo on node harvester-node-0 with spec mgmt-bo (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device mgmt-br on node harvester-node-0 with spec mgmt-br (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device veth6257a2ba on node harvester-node-0 with spec veth6257a2ba (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device veth6b86d033 on node harvester-node-0 with spec veth6b86d033 (virtual)"
+time="2024-01-12T08:12:01Z" level=info msg="found device vip-5ece0a71 on node harvester-node-0 with spec vip-5ece0a71 (virtual)"
